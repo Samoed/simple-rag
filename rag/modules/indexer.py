@@ -1,0 +1,47 @@
+from logging import getLogger
+
+from llama_index.core import (
+    Document,
+    SimpleDirectoryReader,
+    StorageContext,
+    VectorStoreIndex,
+)
+from llama_index.core.node_parser import SentenceSplitter
+from llama_index_client import WeaviateVectorStore
+
+from rag.config import CHUNK_OVERLAP, CHUNK_SIZE, DATA_PATH
+from rag.db import get_embedding_model, get_vector_store
+
+logger = getLogger(__name__)
+
+
+def run():
+    """Run the indexer."""
+    logger.debug("run")
+
+    index: WeaviateVectorStore = get_vector_store()
+    documents: list[Document]
+
+    try:
+        documents: list[Document] = SimpleDirectoryReader(
+            DATA_PATH, recursive=True, exclude=["weaviate"]
+        ).load_data()
+    except ValueError:
+        logger.error("run, no documents found in %s", DATA_PATH)
+        return
+
+    logger.debug("run, loaded documents=%s", documents)
+    storage_context: StorageContext = StorageContext.from_defaults(vector_store=index)
+
+    logger.debug("run, creating vector store index")
+    index: VectorStoreIndex = VectorStoreIndex.from_documents(
+        documents,
+        embed_model=get_embedding_model(),
+        storage_context=storage_context,
+        transformations=[
+            SentenceSplitter(chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
+        ],
+        show_progress=True,
+    )
+
+    logger.debug("run, vector store index created, %s", index)

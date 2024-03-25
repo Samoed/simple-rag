@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "simple-rag"
+version = "0.1.0"
+description = "Простой RAG"
+authors = ["Anton Belousov <anton@belousov.co>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+llama-cpp-python = "^0.2.57"
+python-dotenv = "^1.0.1"
+sentence-transformers = "^2.6.0"
+llama-index-core = "^0.10.23.post1"
+llama-index-readers-file = "^0.1.12"
+llama-index-vector-stores-weaviate = "^0.1.4"
+llama-index-embeddings-langchain = "^0.1.2"
+langchain = "^0.1.13"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
