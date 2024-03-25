@@ -2,16 +2,15 @@ from argparse import ArgumentParser
 from logging import config as logging_config
 from logging import getLogger
 
-from rag.modules import indexer, internet, router, search
+from rag.modules import indexer, router
 
 logger = getLogger(__name__)
 
 
-def query(
-    q: str,
-):
+def query(q: str):
     """Send a query to the LLM model and return the results."""
     logger.debug("query, q=%s", q)
+    router.run(q)
 
 
 def index(*args, **kwargs):
@@ -20,12 +19,7 @@ def index(*args, **kwargs):
     indexer.run()
 
 
-def clear(*args, **kwargs):
-    """Clear the index."""
-    logger.debug("clear")
-
-
-COMMANDS_TO_METHODS = {"query": query, "index": index, "clear": clear}
+COMMANDS_TO_METHODS = {"query": query, "index": index}
 
 
 if __name__ == "__main__":

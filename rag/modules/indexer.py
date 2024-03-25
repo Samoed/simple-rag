@@ -19,7 +19,7 @@ def run():
     """Run the indexer."""
     logger.debug("run")
 
-    index: WeaviateVectorStore = get_vector_store()
+    vector_store: WeaviateVectorStore = get_vector_store()
     documents: list[Document]
 
     try:
@@ -31,7 +31,9 @@ def run():
         return
 
     logger.debug("run, loaded documents=%s", documents)
-    storage_context: StorageContext = StorageContext.from_defaults(vector_store=index)
+    storage_context: StorageContext = StorageContext.from_defaults(
+        vector_store=vector_store
+    )
 
     logger.debug("run, creating vector store index")
     index: VectorStoreIndex = VectorStoreIndex.from_documents(

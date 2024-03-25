@@ -2,6 +2,7 @@
 This module contains the database connection logic.
 """
 
+from logging import getLogger
 from typing import Optional
 
 from langchain_community.embeddings.sentence_transformer import (
@@ -9,45 +10,50 @@ from langchain_community.embeddings.sentence_transformer import (
 )
 from llama_index.embeddings.langchain import LangchainEmbedding
 from llama_index.vector_stores.weaviate import WeaviateVectorStore
-from weaviate import Client
 from weaviate.embedded import EmbeddedOptions
 
 from rag.config import EMBEDDINGS_PATH, INDEX_NAME, WEAVIATE_DATA_PATH
+from weaviate import Client
 
-client: Optional[Client] = None
+_store: Optional[WeaviateVectorStore] = None
+_model: Optional[LangchainEmbedding] = None
+
+logger = getLogger(__name__)
 
 
 def get_vector_store() -> WeaviateVectorStore:
     """Get the Weaviate vector store."""
-    global client
+    global _store
 
-    if client is not None:
-        return client
+    if _store is not None:
+        return _store
 
-    client = Client(
+    client: Client = Client(
         embedded_options=EmbeddedOptions(persistence_data_path=WEAVIATE_DATA_PATH)
     )
 
-    vector_store: WeaviateVectorStore = WeaviateVectorStore(
-        client, index_name=INDEX_NAME
-    )
+    _store = WeaviateVectorStore(client, index_name=INDEX_NAME)
 
-    return vector_store
+    return _store
 
 
 def get_embedding_model() -> LangchainEmbedding:
     """
     Get embedding model
     """
-    return LangchainEmbedding(SentenceTransformerEmbeddings(model_name=EMBEDDINGS_PATH))
+    global _model
+
+    if _model is not None:
+        return _model
+
+    logger.debug("get_embedding_model, loading model")
+    _model = LangchainEmbedding(
+        SentenceTransformerEmbeddings(model_name=EMBEDDINGS_PATH)
+    )
+
+    return _model
 
 
 def remove():
     """Remove the Weaviate data."""
-    global client
-
-    if client is None:
-        return
-
-    client
-    client = None
+    pass
