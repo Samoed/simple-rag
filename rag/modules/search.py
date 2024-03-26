@@ -30,6 +30,7 @@ def get_tool() -> QueryEngineTool:
 
     tool: QueryEngineTool = QueryEngineTool.from_defaults(
         query_engine=vector_query_engine,
+        name="database_search_tool",
         description=(
             "Useful for searching information about large language models, conversational agents, "
             "fine-tuning and question answering systems."

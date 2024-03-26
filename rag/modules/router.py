@@ -20,8 +20,8 @@ class RAGQueryEngine(CustomQueryEngine):
         "---------------------\n"
         "{tools_str}\n"
         "---------------------\n"
-        "Given the tools list and not prior knowledge, choose the best tool for the query. "
-        "Only answer with tool name.\n"
+        "Given the tool list, choose the most appropriate tool to process the query. "
+        "Only answer with tool name and nothing else.\n"
         "Query: {query_str}\n"
         "Tool:"
     )
