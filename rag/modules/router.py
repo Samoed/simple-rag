@@ -38,9 +38,7 @@ class RAGQueryEngine(CustomQueryEngine):
             [f"{t.metadata.name}: {t.metadata.description}" for t in self.tools]
         )
         prompt: str = self.TOOLS_PROMPT.format(tools_str=tools_str, query_str=query_str)
-
         logger.debug("custom_query, prompt=%s", prompt)
-
         selected_tool: str = str(self.llm.complete(prompt)).strip()
         logger.debug("custom_query, selected_tool=%s", selected_tool)
 

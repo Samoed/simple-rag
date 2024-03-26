@@ -1,3 +1,4 @@
+import re
 from json import loads
 from logging import getLogger
 
@@ -33,34 +34,50 @@ class InternetSearchQueryEngine(CustomQueryEngine):
     llm: LlamaCPP
     search_tool: BraveSearchToolSpec
 
+    def _clear_text(self, text: str) -> str:
+        """Clear text"""
+        text = re.sub(r" {2,}", " ", text)
+        text = re.sub(r" \n", "\n", text)
+        text = re.sub(r"\n{3,}", "\n\n", text)
+
+        return text.strip()
+
+    def _search(self, query: str) -> list[str]:
+        """Search internet and get content list"""
+        # get a result list from Brave API
+        search_results: list[Document] = self.search_tool.brave_search(query, "ru", 5)
+        search_result_list: list[dict] = loads(search_results[0].text)["web"]["results"]
+        contents: list[str] = []
+
+        for search_result in search_result_list[:2]:
+            logger.debug("_search, fetching url=%s", search_result["url"])
+            response: Response = http_get(search_result["url"], timeout=10)
+            content: str = get_text(response.text).strip()
+            content = self._clear_text(content)
+
+            # avoid too long content
+            if len(content) > 1024:
+                content = content[:1024]
+
+            contents.append(content)
+
+        return contents
+
     def custom_query(self, query_str: str) -> str:
         """Custom query handler"""
         logger.debug("custom_query, query_str=%s", query_str)
 
-        # get a result list from Brave API
-        search_results: list[Document] = self.search_tool.brave_search(
-            query_str, "ru", 5
+        search_results: list[str] = self._search(query_str)
+        context_str: str = "\n---\n".join(search_results)
+        prompt: str = self.ANSWER_PROMPT.format(
+            context_str=context_str, query_str=query_str
         )
-        search_result_list: list[dict] = loads(search_results[0].text)["web"]["results"]
-        logger.debug("custom_query, got search results=%s", search_result_list)
+        logger.debug("custom_query, prompt=%s", prompt)
 
-        # get first 2 results
-        contexts: list[str] = []
+        result: str = str(self.llm.complete(prompt)).strip()
+        logger.debug("custom_query, result=%s", result)
 
-        for search_result in search_result_list[:2]:
-            logger.debug("custom_query, fetching url=%s", search_result["url"])
-            response: Response = http_get(search_result["url"], timeout=10)
-            content: str = response.content
-
-            # avoid too long content
-            if len(content) > 512:
-                content = content[:512]
-
-            contexts.append(get_text(content))
-
-        logger.debug("custom_query, contexts=%s", contexts)
-
-        return search_results[0].text
+        return result
 
 
 def get_tool() -> QueryEngineTool:
