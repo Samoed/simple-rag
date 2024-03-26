@@ -1124,6 +1124,20 @@ pypdf = ">=4.0.1,<5.0.0"
 striprtf = ">=0.0.26,<0.0.27"
 
 [[package]]
+name = "llama-index-tools-brave-search"
+version = "0.1.0"
+description = "llama-index tools brave_search integration"
+optional = false
+python-versions = ">=3.8.1,<4.0"
+files = [
+    {file = "llama_index_tools_brave_search-0.1.0-py3-none-any.whl", hash = "sha256:96bcc95055a6c53344d2baa01a2c2caa321e019a966447d5341f895c2c839258"},
+    {file = "llama_index_tools_brave_search-0.1.0.tar.gz", hash = "sha256:37787bdbfbc5177e1808cffea9eeb2167c020ae1a670ece635c4baf13142be39"},
+]
+
+[package.dependencies]
+llama-index-core = ">=0.10.0,<0.11.0"
+
+[[package]]
 name = "llama-index-vector-stores-weaviate"
 version = "0.1.4"
 description = "llama-index vector_stores weaviate integration"
@@ -3291,4 +3305,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "7815c1c629257c8b8ad0dc982dcaccf63196f3cacaa5fe4502535869ac13953f"
+content-hash = "a5990b45f1fadba790ec07593b92116170a20e1e213c9aab567379262560a625"

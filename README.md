@@ -1,7 +1,7 @@
 # Simple RAG
 
 Простая RAG-система, рассмотренная на лекции "Уязвимости RAG".
-Для инференса не требуется GPU, можно запустить ПО на любом компьютере с достаточным объёмом RAM.
+Для инференса *не требуется* GPU, можно запустить ПО на любом компьютере с достаточным (~8 Гб) объёмом RAM.
 
 ## Архитектура
 
@@ -17,13 +17,14 @@
 
 Внешние компоненты:
 - Векторное хранилище - Weaviate Embedded
-- LLM - phi-2 GGUF, рекомендуется взять [5-битную квантизацию](https://huggingface.co/TheBloke/phi-2-GGUF/resolve/main/phi-2.Q5_K_S.gguf)
+- LLM - Mistral 7B OpenOrca GGUF, рекомендуется взять [4-битную квантизацию](https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF/resolve/main/mistral-7b-openorca.Q4_K_M.gguf)
 - Embedding - [multilingual-e5-small](https://huggingface.co/intfloat/multilingual-e5-small)
 
 ## Зависимости
 
 - Python 3.11+
 - Poetry
+- Brave Search API (можно использовать мой ключ, который я выдам в задании, или зарегистрировать свой)
 
 ## Установка
 

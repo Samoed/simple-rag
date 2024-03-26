@@ -5,3 +5,4 @@ __pycache__
 .vscode
 weaviate/**
 !weaviate/.gitkeep
+.DS_Store

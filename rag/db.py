@@ -15,6 +15,7 @@ from weaviate.embedded import EmbeddedOptions
 from rag.config import EMBEDDINGS_PATH, INDEX_NAME, WEAVIATE_DATA_PATH
 from weaviate import Client
 
+_client: Optional[Client] = None
 _store: Optional[WeaviateVectorStore] = None
 _model: Optional[LangchainEmbedding] = None
 
@@ -23,16 +24,18 @@ logger = getLogger(__name__)
 
 def get_vector_store() -> WeaviateVectorStore:
     """Get the Weaviate vector store."""
+    global _client
     global _store
 
     if _store is not None:
         return _store
 
-    client: Client = Client(
-        embedded_options=EmbeddedOptions(persistence_data_path=WEAVIATE_DATA_PATH)
-    )
+    if _client is None:
+        _client = Client(
+            embedded_options=EmbeddedOptions(persistence_data_path=WEAVIATE_DATA_PATH)
+        )
 
-    _store = WeaviateVectorStore(client, index_name=INDEX_NAME)
+    _store = WeaviateVectorStore(_client, index_name=INDEX_NAME)
 
     return _store
 
@@ -54,6 +57,10 @@ def get_embedding_model() -> LangchainEmbedding:
     return _model
 
 
-def remove():
-    """Remove the Weaviate data."""
-    pass
+def stop():
+    """Stop weaviate"""
+    global _client
+
+    if _client is not None:
+        del _client
+        _client = None
