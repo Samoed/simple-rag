@@ -38,3 +38,6 @@
 
 ## Запуск
 
+    python main.py query "что такое бенчмарк MERA?"
+
+    python main.py query "где находится Москва?"
