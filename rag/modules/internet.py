@@ -93,7 +93,8 @@ def get_tool() -> QueryEngineTool:
         query_engine=search_query_engine,
         name="internet_search_tool",
         description=(
-            "Useful for searching information online on arbitrary topic, besides other tools."
+            "Useful for searching information online on arbitrary topic, besides other tools. "
+            "Use this only if you 100% sure no other tool is suitable."
         ),
     )
 
