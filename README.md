@@ -25,7 +25,7 @@
 
 - Python 3.11+
 - Poetry
-- Brave Search API - можно использовать мой ключ, который я выдам в задании, или зарегистрировать свой
+- Brave Search API - можно использовать мой ключ, который я выдам в задании, или [зарегистрировать свой](https://api.search.brave.com/register)
 - LLM - Mistral 7B OpenOrca GGUF, рекомендуется взять [4-битную квантизацию](https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF/resolve/main/mistral-7b-openorca.Q4_K_M.gguf)
 - Embedding - [multilingual-e5-small](https://huggingface.co/intfloat/multilingual-e5-small)
 
