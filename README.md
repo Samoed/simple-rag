@@ -1,7 +1,8 @@
 # Simple RAG
 
 Простая RAG-система, рассмотренная на лекции "Уязвимости RAG".
-Для инференса *не требуется* GPU, можно запустить ПО на любом компьютере с достаточным (~8 Гб) объёмом RAM.
+Используются только оффлайн-модели, доступы в онлайн-LLM не требуются.
+Для инференса *не требуется* GPU, можно запустить ПО на любом компьютере с достаточным (~8 Гб) объёмом RAM. 
 
 ## Архитектура
 
@@ -23,11 +24,18 @@
 
 ## Зависимости
 
+- Git
 - Python 3.11+
-- Poetry
-- Brave Search API - можно использовать мой ключ, который я выдам в задании, или [зарегистрировать свой](https://api.search.brave.com/register)
-- LLM - Mistral 7B OpenOrca GGUF, рекомендуется взять [4-битную квантизацию](https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF/resolve/main/mistral-7b-openorca.Q4_K_M.gguf)
-- Embedding - [multilingual-e5-small](https://huggingface.co/intfloat/multilingual-e5-small)
+- [Poetry](https://python-poetry.org/)
+- Ключ Brave Search API - можно использовать мой, который я выдам в задании, или [зарегистрировать свой](https://api.search.brave.com/register)
+- LLM - Mistral 7B OpenOrca GGUF, рекомендуется взять [4-битную квантизацию](https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF/resolve/main/mistral-7b-openorca.Q4_K_M.gguf):
+
+        wget https://huggingface.co/TheBloke/Mistral-7B-OpenOrca-GGUF/resolve/main/mistral-7b-openorca.Q4_K_M.gguf
+
+- Embedding - [multilingual-e5-small](https://huggingface.co/intfloat/multilingual-e5-small):
+
+        git lfs install
+        git clone https://huggingface.co/intfloat/multilingual-e5-small
 
 ## Установка
 
@@ -47,7 +55,7 @@
 - `EMBEDDINGS_PATH` (models/multilingual-e5-small) - путь к модели эмбеддингов
 - `CHUNK_SIZE` (1024) - размер чанка при разбиении исходных данных
 - `CHUNK_OVERLAP` (20) - размер "перекрытия" при разбиении исходных данных
-- `BRAVE_SEARCH_API_KEY` (none) - ключ Brave Search API. Хранить ключи в репозитории плохо!
+- `BRAVE_SEARCH_API_KEY` (none) - ключ Brave Search API
 
 ## Запуск
 
@@ -73,3 +81,5 @@
 1. Определить угрозы и оценить их риск для каждого *внутреннего* компонента (все кружки внутри границы доверия на диаграмме архитектуры). За корректное описание всех угроз для каждого компонента начисляется 1 балл. Всего внутренних компонентов 5, поэтому максимальное количество баллов за этот пункт - 5.
 2. Для каждой описанной угрозы описать сценарии реагирования (смягчения). Корректное описание сценариев реагирования для всех угроз 1 компонента оценивается в 1 балл. Максимальное количество баллов за этот пункт - 5 (если описаны варианты реагирования для всех угроз всех компонентов).
 3. Бонусные баллы - 5 баллов, если вы сможете запустить этот RAG и продемонстрировать на видео эксплуатацию одной из описанных вами угроз.
+
+Итого, максимально возможное количество баллов - 15.
