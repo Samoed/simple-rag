@@ -1,3 +1,9 @@
+"""
+Internet fetcher - creates a QueryEngineTool, that sends query to Brave Search API,
+gets first 2 results, fetches their content and asks LLM to answer the query using data
+from those 2 websites.
+"""
+
 import re
 from json import loads
 from logging import getLogger
@@ -93,8 +99,7 @@ def get_tool() -> QueryEngineTool:
         query_engine=search_query_engine,
         name="internet_search_tool",
         description=(
-            "Useful for searching information online on arbitrary topic, besides other tools. "
-            "Use this only if you 100% sure no other tool is suitable."
+            "Useful for searching information online on arbitrary topic, besides other tools."
         ),
     )
 

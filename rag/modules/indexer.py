@@ -1,3 +1,7 @@
+"""
+Indexer - ingests data from DATA_PATH directory and adds it to Weaviate database.
+"""
+
 from logging import getLogger
 
 from llama_index.core import (

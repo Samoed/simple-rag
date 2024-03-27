@@ -1,3 +1,8 @@
+"""
+Query router - determines user's intent and either sends request to Weaviate, or to
+internet search module.
+"""
+
 from logging import getLogger
 from typing import Optional
 
@@ -40,6 +45,11 @@ class RAGQueryEngine(CustomQueryEngine):
         prompt: str = self.TOOLS_PROMPT.format(tools_str=tools_str, query_str=query_str)
         logger.debug("custom_query, prompt=%s", prompt)
         selected_tool: str = str(self.llm.complete(prompt)).strip()
+
+        # sometimes Mistral continues generation after tool selection
+        if "\n" in selected_tool:
+            selected_tool = selected_tool[: selected_tool.find("\n")].strip()
+
         logger.debug("custom_query, selected_tool=%s", selected_tool)
 
         tool_obj: Optional[QueryEngineTool] = None
