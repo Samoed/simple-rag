@@ -24,7 +24,7 @@
 
 ## Зависимости
 
-- Git
+- Git, Git LFS
 - Python 3.11+
 - [Poetry](https://python-poetry.org/)
 - Ключ Brave Search API - можно использовать мой, который я выдам в задании, или [зарегистрировать свой](https://api.search.brave.com/register)
