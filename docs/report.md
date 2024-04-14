@@ -87,3 +87,39 @@
 2. LLM03: Training Data Poisoning
    Verify the supply chain of the training data, especially when sourced externally as well as maintaining attestations via the "ML-BOM" (Machine Learning Bill of Materials) methodology as well as verifying model cards
 
+# Rix matrix
+| Risk                                    | Likelihood | Impact | Severity |
+|-----------------------------------------|------------|--------|----------|
+| **Приложение**                          |            |        |          |
+|                                         |            |        |          |
+| LLM01: Prompt Injection                 | 3          | 4      | 12       |
+| LLM04: Model Denial of Service          | 3          | 4      | 12       |
+| LLM02: Insecure Output Handling         | 3          | 4      | 12       |
+| LLM06: Sensitive Information Disclosure| 3          | 4      | 12       |
+| LLM09: Overreliance                     | 3          | 4      | 12       |
+|                                         |            |        |          |
+| **Маршрутизатор**                       |            |        |          |
+|                                         |            |        |          |
+| LLM08: Excessive Agency                 | 3          | 4      | 12       |
+|                                         |            |        |          |
+| **Инструмент поиска в интернете**       |            |        |          |
+|                                         |            |        |          |
+| LLM08: Excessive Agency                 | 3          | 4      | 12       |
+| LLM02: Insecure Output Handling         | 3          | 4      | 12       |
+| LLM04: Model Denial of Service          | 3          | 4      | 12       |
+| LLM01: Prompt Injection                 | 3          | 4      | 12       |
+| LLM06: Sensitive Information Disclosure| 3          | 4      | 12       |
+| LLM09: Overreliance                     | 3          | 4      | 12       |
+|                                         |            |        |          |
+| **Поиск по базе знаний**                |            |        |          |
+|                                         |            |        |          |
+| LLM06: Sensitive Information Disclosure| 3          | 4      | 12       |
+| LLM02: Insecure Output Handling         | 3          | 4      | 12       |
+| LLM09: Overreliance                     | 3          | 4      | 12       |
+| LLM01: Prompt Injection                 | 3          | 4      | 12       |
+| LLM04: Model Denial of Service          | 3          | 4      | 12       |
+|                                         |            |        |          |
+| **Индексатор**                          |            |        |          |
+|                                         |            |        |          |
+| LLM06: Sensitive Information Disclosure| 3          | 4      | 12       |
+| LLM03: Training Data Poisoning          | 3          | 4      | 12       |
