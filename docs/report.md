@@ -71,11 +71,11 @@
    
    Regularly monitor and review the LLM outputs. Use self-consistency or voting techniques to filter out inconsistent text. Comparing multiple model responses for a single prompt can better judge the quality and consistency of output
    
-5. LLM01: Prompt Injection
+4. LLM01: Prompt Injection
    
    Segregate external content from user prompts. Separate and denote where untrusted content is being used to limit their influence on user prompts. For example, use ChatML for OpenAI API calls to indicate to the LLM the source of prompt input
 
-6. LLM04: Model Denial of Service
+5. LLM04: Model Denial of Service
    
    Implement input validation and sanitization to ensure user input adheres to defined limits and filters out any malicious content
 
