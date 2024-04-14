@@ -87,39 +87,53 @@
 2. LLM03: Training Data Poisoning
    Verify the supply chain of the training data, especially when sourced externally as well as maintaining attestations via the "ML-BOM" (Machine Learning Bill of Materials) methodology as well as verifying model cards
 
-# Rix matrix
+# Risk matrix
+## Likelyhood scale
+- Very likely (5): You can be pretty sure this risk will occur at some point in time.
+- Probable (4): There’s a good chance this risk will occur.
+- Possible (3): This risk could happen, but it might not. This risk has split odds.
+- Not likely (2): There’s a good chance this risk won’t occur.
+- Very unlikely (1): It’s a long shot that this risk will occur.
+## Impact scale
+- Negligible (1): The risk will have little consequences if it occurs.
+- Minor (2): The consequences of the risk will be easy to manage.
+- Moderate (3): The consequences of the risk will take time to mitigate.
+- Major (4): The consequences of this risk will be significant and may cause long-term damage.
+- Catastrophic (5): The consequences of this risk will be detrimental and may be hard to recover 
+
 | Risk                                    | Likelihood | Impact | Severity |
 |-----------------------------------------|------------|--------|----------|
 | **Приложение**                          |            |        |          |
 |                                         |            |        |          |
-| LLM01: Prompt Injection                 | 3          | 4      | 12       |
-| LLM04: Model Denial of Service          | 3          | 4      | 12       |
-| LLM02: Insecure Output Handling         | 3          | 4      | 12       |
-| LLM06: Sensitive Information Disclosure| 3          | 4      | 12       |
-| LLM09: Overreliance                     | 3          | 4      | 12       |
+| LLM01: Prompt Injection                 | Probable (4) | Major (4) | 16       |
+| LLM04: Model Denial of Service          | Probable (4) | Major (4) | 16       |
+| LLM02: Insecure Output Handling         | Probable (4) | Major (4) | 16       |
+| LLM06: Sensitive Information Disclosure| Probable (4) | Major (4) | 16       |
+| LLM09: Overreliance                     | Probable (4) | Major (4) | 16       |
 |                                         |            |        |          |
 | **Маршрутизатор**                       |            |        |          |
 |                                         |            |        |          |
-| LLM08: Excessive Agency                 | 3          | 4      | 12       |
+| LLM08: Excessive Agency                 | Possible (3) | Moderate (3) | 9       |
 |                                         |            |        |          |
 | **Инструмент поиска в интернете**       |            |        |          |
 |                                         |            |        |          |
-| LLM08: Excessive Agency                 | 3          | 4      | 12       |
-| LLM02: Insecure Output Handling         | 3          | 4      | 12       |
-| LLM04: Model Denial of Service          | 3          | 4      | 12       |
-| LLM01: Prompt Injection                 | 3          | 4      | 12       |
-| LLM06: Sensitive Information Disclosure| 3          | 4      | 12       |
-| LLM09: Overreliance                     | 3          | 4      | 12       |
+| LLM08: Excessive Agency                 | Possible (3) | Moderate (3) | 9       |
+| LLM02: Insecure Output Handling         | Probable (4) | Major (4) | 16       |
+| LLM04: Model Denial of Service          | Probable (4) | Major (4) | 16       |
+| LLM01: Prompt Injection                 | Probable (4) | Major (4) | 16       |
+| LLM06: Sensitive Information Disclosure| Probable (4) | Major (4) | 16       |
+| LLM09: Overreliance                     | Probable (4) | Major (4) | 16       |
 |                                         |            |        |          |
 | **Поиск по базе знаний**                |            |        |          |
 |                                         |            |        |          |
-| LLM06: Sensitive Information Disclosure| 3          | 4      | 12       |
-| LLM02: Insecure Output Handling         | 3          | 4      | 12       |
-| LLM09: Overreliance                     | 3          | 4      | 12       |
-| LLM01: Prompt Injection                 | 3          | 4      | 12       |
-| LLM04: Model Denial of Service          | 3          | 4      | 12       |
+| LLM06: Sensitive Information Disclosure| Probable (4) | Major (4) | 16       |
+| LLM02: Insecure Output Handling         | Probable (4) | Major (4) | 16       |
+| LLM09: Overreliance                     | Probable (4) | Major (4) | 16       |
+| LLM01: Prompt Injection                 | Probable (4) | Major (4) | 16       |
+| LLM04: Model Denial of Service          | Probable (4) | Major (4) | 16       |
 |                                         |            |        |          |
 | **Индексатор**                          |            |        |          |
 |                                         |            |        |          |
-| LLM06: Sensitive Information Disclosure| 3          | 4      | 12       |
-| LLM03: Training Data Poisoning          | 3          | 4      | 12       |
+| LLM06: Sensitive Information Disclosure| Probable (4) | Major (4) | 16       |
+| LLM03: Training Data Poisoning          | Possible (3) | Major (4) | 12       |
+
